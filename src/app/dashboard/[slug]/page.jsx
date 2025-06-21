@@ -55,11 +55,11 @@ export default function DashboardPage({ params }) {
         </div>
 
         {/* graph */}
-        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-3">
-            <div className="bg-slate-100 w-full h-96">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
+            <div className="bg-slate-100 w-full xl:h-full lg:h-full md:h-72 h-40 p-1 flex items-center justify-center">
                 <DoughnutChart />
             </div>
-            <div className="bg-slate-100 w-full h-96">
+            <div className="bg-slate-100 w-full xl:h-full lg:h-full md:h-72 h-40 p-1 flex items-center justify-center">
                 <DailyCharts />
             </div>
         </div>

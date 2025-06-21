@@ -25,8 +25,8 @@ const Dashboard = () => {
       <div className="min-w-48 min-h-screen bg-sky-900 fixed flex flex-col items-center justify-around">
         {/* users side */}
         <div className="flex flex-col gap-y-2 items-center">
-          <Image src={userImg} alt="user" width={75} height={75} className="rounded-full bg-sky-100"/>
-          <h2 className='text-sky-200 font-bold text-2xl'>Gowtham</h2>
+          <Image src={userImg} alt="user" width={50} height={50} className="rounded-full bg-sky-100"/>
+          <h2 className='text-sky-200 font-bold text-lg xl:text-2xl lg:text-2xl'>Gowtham</h2>
           <span className='border-b border-b-sky-400 h-0.5 min-w-48 mt-4'></span>
         </div>
         {/* Lists */}
