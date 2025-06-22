@@ -1,5 +1,6 @@
 import { DailyCharts } from '@/Components/DailyCharts';
 import { DoughnutChart } from '@/Components/DoughnutChart';
+import { Header } from '@/Components/Header';
 import { Bird, Coffee, Squirrel } from 'lucide-react';
 import React from 'react';
 
@@ -10,10 +11,7 @@ export default function DashboardPage({ params }) {
     <section className="w-full min-h-screen bg-white px-4 py-6 overflow-x-hidden">
       <div className="flex flex-col gap-y-6 max-w-screen-2xl mx-auto">
         {/* Heading */}
-        <div className="flex flex-col gap-y-2">
-          <h1 className="text-4xl font-bold text-sky-800">Dashboard:</h1>
-          <p className="text-lg font-medium">Status for daily attendance records...</p>
-        </div>
+        <Header header={"Dashboard"} subHeader={"Status for daily attendance records..."}/>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -62,6 +60,14 @@ export default function DashboardPage({ params }) {
             <div className="bg-slate-100 w-full xl:h-full lg:h-full md:h-72 h-40 p-1 flex items-center justify-center">
                 <DailyCharts />
             </div>
+        </div>
+        {/* banner */}
+        <div className="text-2xl font-bold flex flex-col justify-center gap-y-2 items-center">
+          <span className="text-orange-500">{`சோதிப்பது காலமாக இருந்தாலும் சாதிப்பது நீங்களாக இருங்கள்`} </span>
+          <br />
+          <span className="text-blue-500">{`தோல்வி உன்னை துரத்தினால், நீ வெற்றியை நோக்கி ஓடு`}</span>
+          <br />
+          <span className="text-green-500">{`தைரியம் பயத்தை விட ஒரு படி மேலே உள்ளது`}</span>
         </div>
       </div>
     </section>

@@ -23,7 +23,7 @@ export default function DashboardLayout({ children }) {
     return (
         <div className="min-h-screen w-full flex overflow-x-hidden">
             {/* Sidebar */}
-            <div className="w-16 md:w-24 lg:w-48 xl:w-48 h-screen transition-all bg-sky-900 fixed left-0 top-0 flex flex-col items-center justify-between py-6 z-10">
+            <div className="w-16 md:w-24 lg:w-48 xl:w-48 h-screen transition-all bg-sky-900 fixed left-0 top-0 flex flex-col items-center gap-y-12 py-6 z-10">
                 {/* User Info */}
                 <div className="flex flex-col gap-y-2 items-center">
                     <Image src={userImg} alt="user" width={24} height={24} className="xl:min-w-24 xl:min-h-24 md:min-w-16 md:min-h-16 min-w-10 min-h-10 rounded-full bg-sky-100" />
