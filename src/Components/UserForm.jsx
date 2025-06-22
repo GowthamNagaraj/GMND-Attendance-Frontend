@@ -80,22 +80,25 @@ const UserForm = () => {
                     emailValidator:"bg-lime-100",
                     passwordValidator:"bg-lime-100"
                 }))
-                // setIsLoading(false);
-                // axios.post(`${API}/users/login`, formData)
-                //     .then((response) => {
-                //         console.log(response);
-                //         alert(response.data.message)
-                //         localStorage.setItem("token",response.data.token)
-                //         localStorage.setItem("user",response.data.data.username)
-                //         const userid = response.data.data._id
-                //         setIsLoading(true);
-                //         if (response.status === 200) {
-                //             router.push(`/records/${userid}`);
-                //         }
-                //     })
-                //     .catch((error) => {
-                //         console.log(error);
-                //     });
+                setIsLoading(false);
+                axios.post(`${API}/users/login`, formData)
+                    .then((response) => {
+                        console.log(response);
+                        alert(response.data.message)
+                        localStorage.setItem("token",response.data.token)
+                        localStorage.setItem("user",response.data.data.username)
+                        const userid = response.data.data._id
+                        localStorage.setItem("userid",userid)
+                        setIsLoading(true);
+                        if (response.status === 200) {
+                            router.push(`/records/${userid}`);
+                        }
+                    })
+                    .catch((error) => {
+                        alert(error.message+": Check your internet connection?");
+                        setIsLoading(true);
+                        console.log("error:",error.message);
+                    });
             } else {
                 alert("Please fill all the fields");
                 setValidateColor((prevState)=>({

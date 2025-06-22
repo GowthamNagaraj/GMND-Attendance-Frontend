@@ -5,7 +5,7 @@ import { Bird, Coffee, Squirrel } from 'lucide-react';
 import React from 'react';
 
 export default function DashboardPage({ params }) {
-  const slug = params?.slug;
+  const slug = params.slug;
 
   return (
     <section className="w-full min-h-screen bg-white px-4 py-6 overflow-x-hidden">

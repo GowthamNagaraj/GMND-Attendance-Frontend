@@ -1,9 +1,12 @@
 "use client"
+import AttendanceRecords from "@/Components/AttendanceRecords";
 import { Header } from "@/Components/Header";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // app/dashboard/attendancerecord/page.jsx
-export default function AttendanceRecordPage() {
+export default function AttendanceRecordPage({params}) {
+  const slug = params.slug;
+  console.log("slug: ", slug);
 
   const [year, setYear] = useState([
     2024, 2025, 2026
@@ -88,6 +91,9 @@ export default function AttendanceRecordPage() {
           </div>
         </form>
 
+      </div>
+      <div class="w-full mt-4 text-center bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+          <AttendanceRecords userid={slug}/>
       </div>
 
     </section>

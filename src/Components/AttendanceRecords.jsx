@@ -10,7 +10,7 @@ import Progress from "@/ComponentsProgress"
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 
-const DataTableAttendance = ({ userid }) => {
+const AttendanceRecords = ({ userid }) => {
   // console.log(visibleModal)
   const router = useRouter();
   const API = process.env.NEXT_PUBLIC_API_BASE_URL
@@ -239,35 +239,10 @@ const DataTableAttendance = ({ userid }) => {
   }
   return (
     <>
-      <div className="w-56 mx-auto bg-sky-100 p-6 rounded-xl shadow-2xl shadow-sky-300" hidden={open}>
-        <h3 className='text-center text-lime-400 font-bold text-xl'>Enter Attendance</h3>
-
-        <div className="flex flex-col items-center justify-center gap-4 mt-4">
-          <Image
-            src={user}
-            alt='user'
-            width={50}
-            height={50}
-          />
-
-          <p className="text-xl font-bold text-sky-800">{username}</p>
-
-          <div className="flex gap-6">
-            <button className='p-2 cursor-pointer hover:bg-lime-700 rounded-full bg-lime-500'><CirclePlus size={36} color="#ffffff" onClick={() => handleEvent("present")} /></button>
-            <button className='p-2 cursor-pointer hover:bg-red-700 rounded-full bg-red-500'><CircleX size={36} color="#ffffff" onClick={() => handleEvent("absent")} /></button>
-            <button className='p-2 cursor-pointer hover:bg-sky-700 rounded-full bg-sky-500'><Smile size={36} color="#ffffff" onClick={() => handleEvent("weekend")} /></button>
-          </div>
-        </div>
-
-      </div>
       <div className="p-6 bg-sky-100 rounded-lg shadow-lg w-full h-lvh overflow-y-scroll" hidden={!open}>
         {/* table */}
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold mb-6 text-sky-800">Daily Attendance {`- ${month}-${new Date().getFullYear()} - Date: ${currDate}`}</h2>
-          <div className="flex flex-col xl:flex-row lg:flex-row gap-x-4">
-            <Link href={`/dashboard/${userid}`} className='bg-sky-800 rounded-full p-3' onClick={() => setOpen(!open)}><LayoutDashboard size={28} color="#ffffff" strokeWidth={2} /></Link>
-            <Link href="/" className='bg-sky-800 rounded-full p-3' onClick={() => setOpen(!open)}><DoorOpen size={28} color="#ffffff" /></Link>
-          </div>
         </div>
         {/* Search and Controls */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
@@ -453,4 +428,4 @@ const DataTableAttendance = ({ userid }) => {
   );
 };
 
-export default DataTableAttendance;
+export default AttendanceRecords;

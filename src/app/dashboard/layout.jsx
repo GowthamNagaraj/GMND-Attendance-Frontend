@@ -1,11 +1,16 @@
+"use client"
 import { DoorOpen, LayoutDashboard, Sheet } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import React from 'react'
 const userImg = "/images/user.png"
 
 export default function DashboardLayout({ children }) {
-    const userid = 1;
+    let userid = useParams();
+    userid = userid.slug
+    console.log("userid: ", userid);
+    
     const linkList = [
         {
             id: 1,
@@ -16,7 +21,7 @@ export default function DashboardLayout({ children }) {
         {
             id: 2,
             name: "Attendance-Records",
-            link: `/dashboard/attendancerecord`,
+            link: `/dashboard/attendancerecord/${userid}`,
             icon: <Sheet size={24} color="#ffffff" strokeWidth={2} />
         }
     ]

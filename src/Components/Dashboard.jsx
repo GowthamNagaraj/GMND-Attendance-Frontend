@@ -5,8 +5,8 @@ import Link from 'next/link'
 import React from 'react'
 const userImg = "/images/user.png" 
 
-const Dashboard = () => {
-  const userid = 1;
+const Dashboard = ({userid}) => {
+  const userid = userid;
   const linkList = [
     {
       id:1,
