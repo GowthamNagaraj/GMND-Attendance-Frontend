@@ -5,14 +5,15 @@ import { useState } from "react";
 
 // app/dashboard/attendancerecord/page.jsx
 export default function AttendanceRecordPage({params}) {
-  const slug = params.slug;
-  console.log("slug: ", slug);
+  const userid = params[0];
+  // console.log("slug: ", slug);
 
   const [year, setYear] = useState([
-    2024, 2025, 2026
+    "YEARS",2024, 2025, 2026
   ]);
 
   const [month, setMonth] = useState([
+    { name: "MONTHS",days:0},
     { name: "JAN", days: 31 },
     { name: "FEB", days: 28 },
     { name: "MAR", days: 31 },
@@ -27,7 +28,7 @@ export default function AttendanceRecordPage({params}) {
     { name: "DEC", days: 31 }
   ]);
 
-  const [days, setDays] = useState([0])
+  const [days, setDays] = useState(["DAYS",0])
 
   function handleMonth(e) {
     const arr = []
@@ -41,7 +42,7 @@ export default function AttendanceRecordPage({params}) {
     <section className="w-full min-h-screen bg-white px-4 py-6 overflow-x-hidden">
       <div className="flex flex-col max-w-screen-2xl mx-auto">
         {/* Heading */}
-        <Header header={"Records"} subHeader={"Records for daily attendance records..."} />
+        <Header header={"Records"} subHeader={"Records for daily attendance records..."} team={true} download={false}/>
       </div>
 
 
@@ -51,24 +52,24 @@ export default function AttendanceRecordPage({params}) {
         <form class="max-w-full mx-auto">
 
           <div className="flex flex-col xl:flex-row lg:flex-row gap-x-4">
-            <select id="countries" class="bg-sky-800 border border-gray-300 text-slate-50 text-lg font-bold rounded-lg focus:ring-sky-100 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <option selected>YEAR</option>
+            <select class="bg-sky-800 border border-gray-300 text-slate-50 text-lg font-bold rounded-lg focus:ring-sky-100 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              {/* <option selected>YEAR</option> */}
               {
                 year.map((item, index) =>
                   <option option={item} key={index}>{item}</option>
                 )
               }
             </select>
-            <select id="countries" class="bg-sky-800 border border-gray-300 text-slate-50 text-lg font-bold rounded-lg focus:ring-sky-100 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={(e) => handleMonth(e)}>
-              <option selected>MONTH</option>
+            <select class="bg-sky-800 border border-gray-300 text-slate-50 text-lg font-bold rounded-lg focus:ring-sky-100 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={(e) => handleMonth(e)}>
+              {/* <option selected>MONTH</option> */}
               {
                 month.map((item, index) =>
                   <option option={item.name} key={index} value={item.days}>{item.name}</option>
                 )
               }
             </select>
-            <select id="countries" class="bg-sky-800 border border-gray-300 text-slate-50 text-lg font-bold rounded-lg focus:ring-sky-100 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <option selected>DAYS</option>
+            <select class="bg-sky-800 border border-gray-300 text-slate-50 text-lg font-bold rounded-lg focus:ring-sky-100 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              {/* <option selected>DAYS</option> */}
               {
                 days.map((item, index) => (
                   <option option={item} key={index}>{item}</option>
@@ -93,7 +94,7 @@ export default function AttendanceRecordPage({params}) {
 
       </div>
       <div class="w-full mt-4 text-center bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <AttendanceRecords userid={slug}/>
+          <AttendanceRecords userid={'6849694b758b866ea8a40c61'}/>
       </div>
 
     </section>

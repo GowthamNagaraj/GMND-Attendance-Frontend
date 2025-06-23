@@ -1,7 +1,8 @@
 import { DailyCharts } from '@/Components/DailyCharts';
 import { DoughnutChart } from '@/Components/DoughnutChart';
 import { Header } from '@/Components/Header';
-import { Bird, Coffee, Squirrel } from 'lucide-react';
+import { Bird, Coffee, DoorOpen, Fan, LayoutDashboard, Squirrel } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
 
 export default function DashboardPage({ params }) {
@@ -11,8 +12,9 @@ export default function DashboardPage({ params }) {
     <section className="w-full min-h-screen bg-white px-4 py-6 overflow-x-hidden">
       <div className="flex flex-col gap-y-6 max-w-screen-2xl mx-auto">
         {/* Heading */}
-        <Header header={"Dashboard"} subHeader={"Status for daily attendance records..."}/>
-
+        <div className="flex justify-between">
+          <Header header={"Dashboard"} subHeader={"Status for daily attendance records..."} team={false} download={true}/>
+        </div>
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {/* Card 1 */}
@@ -48,7 +50,7 @@ export default function DashboardPage({ params }) {
               <h2 className="text-xl font-bold text-green-800">WEEKENDS</h2>
               <p className="text-green-800">28 / 365 days</p>
             </div>
-            <Squirrel size={40} className="text-green-800" />
+            <Fan size={40} className="text-green-800"/>
           </div>
         </div>
 

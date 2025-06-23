@@ -1,11 +1,6 @@
 "use client";
 
 import { useState, useMemo, useEffect } from 'react';
-import user from "@publicImages/images/user.png"
-import Image from 'next/image';
-// import Link from "next/link"
-import Link from 'next/link';
-import { CirclePlus, CircleX, Smile, DoorOpen, LayoutDashboard } from 'lucide-react';
 import Progress from "@/ComponentsProgress"
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
@@ -16,7 +11,7 @@ const AttendanceRecords = ({ userid }) => {
   const API = process.env.NEXT_PUBLIC_API_BASE_URL
 
   // get username
-  const username = localStorage.getItem("user");
+  // const username = localStorage.getItem("user");
   // Sample data
   const [data, setData] = useState([]);
 

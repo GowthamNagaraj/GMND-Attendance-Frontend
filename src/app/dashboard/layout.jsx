@@ -36,21 +36,15 @@ export default function DashboardLayout({ children }) {
                 </div>
 
                 {/* Navigation Links */}
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center mt-6">
                     <ul>
                         {linkList.map((list, index) => (
-                            <li key={index} className="text-sky-100 text-sm font-bold mt-4">
+                            <li key={index} className="text-sky-100 text-sm font-bold mt-6">
                                 <Link href={list.link} className='flex items-center gap-x-2'>{list.icon} <span  className='transition-all hidden xl:block lg:block'>{list.name}</span></Link>
                             </li>
                         ))}
                     </ul>
                 </div>
-
-                {/* Logout */}
-                <button className="p-2 mt-4 mb-2 flex items-center justify-center cursor-pointer hover:bg-sky-100 hover:text-sky-800 text-sky-100 rounded-3xl font-bold text-lg gap-x-3 border-2 border-sky-700">
-                    <span className='transition-all hidden xl:block lg:block'>Logout</span>
-                    <DoorOpen size={24} className="text-sky-500 hover:text-sky-800" />
-                </button>
             </div>
 
             {/* Main Content */}
