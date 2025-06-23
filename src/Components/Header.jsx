@@ -9,7 +9,7 @@ export const Header = ({header,subHeader,team, download}) => {
   //   alert(msg)
   // }
   return (
-    <div className="flex justify-between min-w-full items-center">
+    <div className="flex justify-between min-w-full items-center xl:flex-row lg:flex-row flex-col">
       <div className="flex flex-col gap-y-2">
         <h1 className="text-4xl font-bold text-sky-800">{header}:</h1>
         <p className="text-lg font-medium">{subHeader}</p>

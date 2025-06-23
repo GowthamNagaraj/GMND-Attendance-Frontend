@@ -1,13 +1,14 @@
+"use client"
 import { DailyCharts } from '@/Components/DailyCharts';
 import { DoughnutChart } from '@/Components/DoughnutChart';
 import { Header } from '@/Components/Header';
-import { Bird, Coffee, DoorOpen, Fan, LayoutDashboard, Squirrel } from 'lucide-react';
-import Link from 'next/link';
+import { Bird, Coffee, Fan, Squirrel } from 'lucide-react';
 import React from 'react';
+// import Progress from "@/ComponentsProgress"
 
 export default function DashboardPage({ params }) {
-  const slug = params.slug;
-
+  const slug = params[0];
+  // const [isLoading, setIsLoading] = useState(true)
   return (
     <section className="w-full min-h-screen bg-white px-4 py-6 overflow-x-hidden">
       <div className="flex flex-col gap-y-6 max-w-screen-2xl mx-auto">
@@ -72,6 +73,7 @@ export default function DashboardPage({ params }) {
           <span className="text-green-500">{`தைரியம் பயத்தை விட ஒரு படி மேலே உள்ளது`}</span>
         </div>
       </div>
+      {/* <Progress progressHidden={isLoading} /> */}
     </section>
   );
 }

@@ -5,7 +5,7 @@ import { useState } from "react";
 
 // app/dashboard/attendancerecord/page.jsx
 export default function AttendanceRecordPage({params}) {
-  const userid = params[0];
+  const user_id = params[0];
   // console.log("slug: ", slug);
 
   const [year, setYear] = useState([
@@ -49,9 +49,9 @@ export default function AttendanceRecordPage({params}) {
 
       <div class="w-full p-4 text-center bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
 
-        <form class="max-w-full mx-auto">
+        <form class="xl:max-w-full lg:max-w-full max-w-56 mx-auto">
 
-          <div className="flex flex-col xl:flex-row lg:flex-row gap-x-4">
+          <div className="flex flex-col xl:flex-row lg:flex-row gap-x-4 items-center">
             <select class="bg-sky-800 border border-gray-300 text-slate-50 text-lg font-bold rounded-lg focus:ring-sky-100 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               {/* <option selected>YEAR</option> */}
               {
@@ -80,11 +80,11 @@ export default function AttendanceRecordPage({params}) {
             <button type="button" class="text-sky-700 hover:text-sky-100 cursor-pointer border border-sky-700 hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-sky-300 rounded-full text-lg font-bold p-2 text-center me-2 mb-2 dark:border-sky-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-sky-600 dark:focus:ring-sky-800">GO</button>
 
             <div className="flex flex-col xl:flex-row lg:flex-row gap-x-6">
-              <div className="flex items-center justify-center gap-x-2">
+              <div className="flex flex-col items-start justify-center gap-x-2">
                 <label htmlFor="FROM" className="text-lg font-bold text-sky-800">FROM:</label>
                 <input type="date" class="bg-sky-800 border border-sky-300 text-slate-50 font-bold text-lg rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-sky-700 dark:border-sky-600 dark:placeholder-sky-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500" />
               </div>
-              <div className="flex items-center justify-center gap-x-2">
+              <div className="flex flex-col items-start justify-center gap-x-2">
                 <label htmlFor="FROM" className="text-lg font-bold text-sky-800">TO:</label>
                 <input type="date" class="bg-sky-800 border border-sky-300 text-slate-50 font-bold text-lg rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-sky-700 dark:border-sky-600 dark:placeholder-sky-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500" />
               </div>
@@ -94,7 +94,7 @@ export default function AttendanceRecordPage({params}) {
 
       </div>
       <div class="w-full mt-4 text-center bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <AttendanceRecords userid={'6849694b758b866ea8a40c61'}/>
+          <AttendanceRecords userid={ user_id ||'6849694b758b866ea8a40c61'}/>
       </div>
 
     </section>
