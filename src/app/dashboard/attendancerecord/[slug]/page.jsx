@@ -5,7 +5,7 @@ import { useState } from "react";
 
 // app/dashboard/attendancerecord/page.jsx
 export default function AttendanceRecordPage({params}) {
-  const user_id = params[0];
+  const user_id = params.slug;
   // console.log("slug: ", slug);
 
   const [year, setYear] = useState([
@@ -94,7 +94,7 @@ export default function AttendanceRecordPage({params}) {
 
       </div>
       <div class="w-full mt-4 text-center bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <AttendanceRecords userid={ user_id ||'6849694b758b866ea8a40c61'}/>
+          <AttendanceRecords userid={ user_id }/>
       </div>
 
     </section>

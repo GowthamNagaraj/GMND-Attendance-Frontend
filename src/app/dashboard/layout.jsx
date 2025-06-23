@@ -9,7 +9,8 @@ const userImg = "/images/user.png"
 export default function DashboardLayout({ children }) {
     let userid = useParams();
     userid = userid.slug
-    console.log("userid: ", userid);
+    let username = localStorage.getItem("user");
+    // console.log("userid: ", userid);
     
     const linkList = [
         {
@@ -32,7 +33,7 @@ export default function DashboardLayout({ children }) {
                 {/* User Info */}
                 <div className="flex flex-col gap-y-2 items-center">
                     <Image src={userImg} alt="user" width={24} height={24} className="xl:min-w-24 xl:min-h-24 md:min-w-16 md:min-h-16 min-w-10 min-h-10 rounded-full bg-sky-100" />
-                    <h2 className="text-sky-200 font-bold text-xs xl:text-2xl lg:text-xl">Gowtham</h2>
+                    <h2 className="text-sky-200 font-bold text-xs xl:text-2xl lg:text-xl">{username}</h2>
                 </div>
 
                 {/* Navigation Links */}
