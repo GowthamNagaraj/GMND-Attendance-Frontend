@@ -3,14 +3,27 @@ import { DoorOpen, LayoutDashboard, Sheet } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import React from 'react'
+import React, { useEffect } from 'react'
 const userImg = "/images/user.png"
+import {getAttendanceReports} from '@/api/AttendanceApiCalls'
 
 export default function DashboardLayout({ children }) {
     let userid = useParams();
     userid = userid.slug
     let username = localStorage.getItem("user");
-    // console.log("userid: ", userid);
+    const token = localStorage.getItem('token');
+    useEffect(()=>{
+        getData()
+    },[0])
+    async function getData() {
+        try {
+            const reports = await getAttendanceReports({userid,token})
+            // console.log("reports: ",reports);
+        } catch (error) {
+            console.error("Failed to fetch reports:", err);
+        }
+    }
+    
     
     const linkList = [
         {

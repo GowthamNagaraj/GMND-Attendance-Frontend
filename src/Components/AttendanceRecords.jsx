@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import Progress from "@/ComponentsProgress"
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import { getAttendanceReports } from '@/api/AttendanceApiCalls';
 
 const AttendanceRecords = ({ userid }) => {
   // console.log(visibleModal)
@@ -63,21 +64,13 @@ const AttendanceRecords = ({ userid }) => {
 
     const fetchData = async () => {
       try {
-        const response = await axios.post(
-          `${API}/attendance/${userid}`,
-          {}, // empty body (if you don't need to send anything in body)
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          }
-        );
+        const response = await getAttendanceReports({userid,token})
 
-        console.log(response.data.data);
+        console.log(response);
         const dates = [];
-        const attendance = response.data.data.attendance
+        const {attendance,user} = response
         for (let i = 0; i < attendance.length; i++) {
-          attendance[i].username = response.data.data.user[0].username
+          attendance[i].username = user[0].username
           dates.push(attendance[i].dateandtime)
         }
         setData(attendance)
