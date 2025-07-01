@@ -75,18 +75,12 @@ const AttendanceRecords = ({ userid }) => {
         }
         setData(attendance)
 
-        // console.log(dates);
-        const currDate = `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`
-
-        const listSubmitDates = [];
-        dates.map((list) => {
-          const date = list.split("-")[0].trim()
-          listSubmitDates.push(date)
+        const currDate = `0${new Date().getDate()}/0${new Date().getMonth() + 1}/${new Date().getFullYear()}`
+      
+        const submitDates = dates.find((item)=>{
+          return item == currDate
         })
-
-        const submitDates = listSubmitDates.find(date =>
-          date === currDate.trim()
-        );
+        
         if (submitDates) {
           setOpen(!open)
         }
@@ -163,68 +157,7 @@ const AttendanceRecords = ({ userid }) => {
     year: 'numeric', month
       : '2-digit', day: '2-digit'
   });
- async function handleEvent(type) {
-    let action;
-    if (type !== "present") {
-      const reason = prompt("Reason ?");
-      if (type === "absent") {
-        action = {
-          userid: userid,
-          present: 0,
-          absent: 1,
-          weekend: 0,
-          reason: reason.toUpperCase(),
-          dateandtime: `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()} - ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
-          month: `${month} - ${new Date().getFullYear()}`
-        }
-        setIsLoading(false)
-        setOpen(!open)
-        setIsLoading(true)
-        router.push(`/records/${userid}`);
-        window.location.reload();
 
-      } else if (type === "weekend") {
-        action = {
-          userid: userid,
-          present: 0,
-          absent: 0,
-          weekend: 1,
-          reason: reason.toUpperCase(),
-          dateandtime: `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()} - ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
-          month: `${month} - ${new Date().getFullYear()}`
-        }
-        setIsLoading(false)
-        setOpen(!open)
-        setIsLoading(true)
-        router.push(`/records/${userid}`);
-        window.location.reload();
-
-      }
-    } else {
-      action = {
-        userid: userid,
-        present: 1,
-        absent: 0,
-        weekend: 0,
-        reason: "",
-        dateandtime: `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()} - ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
-        month: `${month} - ${new Date().getFullYear()}`
-      }
-      setIsLoading(false)
-      setOpen(!open)
-      setIsLoading(true)
-      router.push(`/records/${userid}`);
-      window.location.reload();
-    }
-
-    await axios.post(`${API}/attendance/`, action).then((res)=>{
-      console.log(res.data)
-    }).catch((err)=>{
-      console.log(err)
-      window.location.reload();
-    })
-
-  }
   return (
     <>
       <div className="p-6 bg-sky-100 rounded-lg shadow-lg w-full h-lvh overflow-y-scroll" hidden={!open}>

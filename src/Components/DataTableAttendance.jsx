@@ -70,7 +70,6 @@ const DataTableAttendance = ({ userid }) => {
       try {
         const response = await getAttendanceReports({userid,token})
 
-        console.log(response);
         const dates = [];
         const {attendance,user} = response
         for (let i = 0; i < attendance.length; i++) {
@@ -79,18 +78,12 @@ const DataTableAttendance = ({ userid }) => {
         }
         setData(attendance)
 
-        // console.log(dates);
-        const currDate = `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`
-
-        const listSubmitDates = [];
-        dates.map((list) => {
-          const date = list.split("-")[0].trim()
-          listSubmitDates.push(date)
+        const currDate = `0${new Date().getDate()}/0${new Date().getMonth() + 1}/${new Date().getFullYear()}`
+      
+        const submitDates = dates.find((item)=>{
+          return item == currDate
         })
-
-        const submitDates = listSubmitDates.find(date =>
-          date === currDate.trim()
-        );
+        
         if (submitDates) {
           setOpen(!open)
         }
@@ -178,7 +171,7 @@ const DataTableAttendance = ({ userid }) => {
           absent: 1,
           weekend: 0,
           reason: reason.toUpperCase(),
-          dateandtime: `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()} - ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
+          dateandtime: `${new Date().getDate() >= 9 ? '0' : null}${new Date().getDate()}/${new Date().getMonth() >= 9 ? '0' : null}${new Date().getMonth() + 1}/${new Date().getFullYear()}`,
           month: `${month} - ${new Date().getFullYear()}`
         }
         setIsLoading(false)
@@ -194,7 +187,7 @@ const DataTableAttendance = ({ userid }) => {
           absent: 0,
           weekend: 1,
           reason: reason.toUpperCase(),
-          dateandtime: `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()} - ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
+          dateandtime: `${new Date().getDate() >= 9 ? '0' : null}${new Date().getDate()}/${new Date().getMonth() >= 9 ? '0' : null}${new Date().getMonth() + 1}/${new Date().getFullYear()}`,
           month: `${month} - ${new Date().getFullYear()}`
         }
         setIsLoading(false)
@@ -211,7 +204,7 @@ const DataTableAttendance = ({ userid }) => {
         absent: 0,
         weekend: 0,
         reason: "",
-        dateandtime: `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()} - ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
+        dateandtime: `${new Date().getDate() >= 9 ? '0' : null}${new Date().getDate()}/${new Date().getMonth() >= 9 ? '0' : null}${new Date().getMonth() + 1}/${new Date().getFullYear()}`,
         month: `${month} - ${new Date().getFullYear()}`
       }
       setIsLoading(false)
