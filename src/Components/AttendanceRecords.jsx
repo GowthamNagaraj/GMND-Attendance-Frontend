@@ -66,16 +66,16 @@ const AttendanceRecords = ({ userid }) => {
       try {
         const response = await getAttendanceReports({userid,token})
 
-        console.log(response);
+        // console.log(response);
         const dates = [];
         const {attendance,user} = response
         for (let i = 0; i < attendance.length; i++) {
           attendance[i].username = user[0].username
-          dates.push(attendance[i].dateandtime)
+          dates.push(attendance[i].date)
         }
         setData(attendance)
 
-        const currDate = `0${new Date().getDate()}/0${new Date().getMonth() + 1}/${new Date().getFullYear()}`
+        const currDate = `${new Date().getFullYear()}/${new Date().getMonth() + 1 >= 9 ? '0' : null}${new Date().getMonth() + 1}/${new Date().getDate() >= 9 ? '0' : null}${new Date().getDate()}`;
       
         const submitDates = dates.find((item)=>{
           return item == currDate
@@ -248,9 +248,15 @@ const AttendanceRecords = ({ userid }) => {
                 </th>
                 <th
                   className="px-6 py-3 text-left text-xs font-medium text-sky-100 uppercase tracking-wider cursor-pointer hover:bg-gray-100 hover:text-sky-800"
-                  onClick={() => handleSort('dateandtime')}
+                  onClick={() => handleSort('date')}
                 >
-                  Date & Time {getSortIcon('dateandtime')}
+                  Date & Time {getSortIcon('date')}
+                </th>
+                <th
+                  className="px-6 py-3 text-left text-xs font-medium text-sky-100 uppercase tracking-wider cursor-pointer hover:bg-gray-100 hover:text-sky-800"
+                  onClick={() => handleSort('time')}
+                >
+                  Date & Time {getSortIcon('time')}
                 </th>
               </tr>
             </thead>
@@ -280,7 +286,10 @@ const AttendanceRecords = ({ userid }) => {
                       {item.reason}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {item.dateandtime}
+                      {item.date}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {item.time}
                     </td>
                     {/* <td className="px-6 py-4 whitespace-nowrap">
                     <span

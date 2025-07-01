@@ -1,37 +1,39 @@
 "use client"
 import AttendanceRecords from "@/Components/AttendanceRecords";
 import { Header } from "@/Components/Header";
-// import axios from "axios";
-// import fileDownload from "js-file-download";
-// import { useState } from "react";
+import axios from "axios";
+import fileDownload from "js-file-download";
+import { useState } from "react";
 
 // app/dashboard/attendancerecord/page.jsx
 export default function AttendanceRecordPage({params}) {
   const user_id = params.slug;
   
-//   const [fromDate, setFromDate] = useState();
-//   const [toDate, setToDate] = useState();
+  const [fromDate, setFromDate] = useState();
+  const [toDate, setToDate] = useState();
 
-//   async function downloadExcels(event) {
-//   event.preventDefault();
+  async function downloadExcels(event) {
+  event.preventDefault();
 
-//   const fDate = fromDate.split("-"); // from input: yyyy-mm-dd
-//   const tDate = toDate.split("-");
+  const fDate = fromDate.split("-");
+  const tDate = toDate.split("-");
 
-//   const from = `${fDate[0]}-${fDate[1]}-${fDate[2]}`;
-//   const to = `${tDate[0]}-${tDate[1]}-${tDate[2]}`;
+  const from = `${fDate[0]}-${fDate[1]}-${fDate[1]}`;
+  const to = `${tDate[0]}-${tDate[1]}-${tDate[1]}`;
 
-//   try {
-//     const res = await axios.get(`http://localhost:1998/GMND/api/downloadRecords/download`, {
-//       params: { from, to },
-//       responseType: 'blob'
-//     });
+  console.log(from,to);
+  
+  try {
+    const res = await axios.get(`http://localhost:1998/GMND/api/downloadRecords/download`, {
+      params: { from, to },
+      responseType: 'blob'
+    });
 
-//     fileDownload(res.data, 'attendance.xlsx');
-//   } catch (error) {
-//     console.log("error: ", error);
-//   }
-// }
+    fileDownload(res.data, 'attendance.xlsx');
+  } catch (error) {
+    console.log("error: ", error);
+  }
+}
   
   return (
     <section className="w-full min-h-screen bg-white px-4 py-6 overflow-x-hidden">
@@ -50,14 +52,14 @@ export default function AttendanceRecordPage({params}) {
             <div className="flex flex-col xl:flex-row lg:flex-row gap-x-6">
               <div className="flex flex-row items-center justify-center gap-x-5">
                 <label htmlFor="FROM" className="text-lg font-bold text-sky-800">FROM:</label>
-                {/* <input type="date" onChange={(e)=>setFromDate(e.target.value)} className="bg-sky-800 border border-sky-300 text-slate-50 font-bold text-lg rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-sky-700 dark:border-sky-600 dark:placeholder-sky-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500" /> */}
+                <input type="date" onChange={(e)=>setFromDate(e.target.value)} className="bg-sky-800 border border-sky-300 text-slate-50 font-bold text-lg rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-sky-700 dark:border-sky-600 dark:placeholder-sky-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500" />
               </div>
               <div className="flex flex-row items-center justify-center gap-x-5">
                 <label htmlFor="FROM" className="text-lg font-bold text-sky-800">TO:</label>
-                {/* <input type="date" onChange={(e)=>setToDate(e.target.value)} className="bg-sky-800 border border-sky-300 text-slate-50 font-bold text-lg rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-sky-700 dark:border-sky-600 dark:placeholder-sky-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500" /> */}
+                <input type="date" onChange={(e)=>setToDate(e.target.value)} className="bg-sky-800 border border-sky-300 text-slate-50 font-bold text-lg rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-sky-700 dark:border-sky-600 dark:placeholder-sky-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500" />
               </div>
             </div>
-            {/* <button type="button" onClick={(e)=>downloadExcels(e)} className="text-sky-700 hover:text-sky-100 cursor-pointer border border-sky-700 hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-sky-300 rounded-full text-lg font-bold p-2 text-center me-2 mb-2 dark:border-sky-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-sky-600 dark:focus:ring-sky-800">GO</button> */}
+            <button type="button" onClick={(e)=>downloadExcels(e)} className="text-sky-700 hover:text-sky-100 cursor-pointer border border-sky-700 hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-sky-300 rounded-full text-lg font-bold p-2 text-center me-2 mb-2 dark:border-sky-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-sky-600 dark:focus:ring-sky-800">GO</button>
           </div>
         </form>
 

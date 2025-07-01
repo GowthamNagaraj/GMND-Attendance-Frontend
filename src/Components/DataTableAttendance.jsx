@@ -78,7 +78,7 @@ const DataTableAttendance = ({ userid }) => {
         }
         setData(attendance)
 
-        const currDate = `0${new Date().getDate()}/0${new Date().getMonth() + 1}/${new Date().getFullYear()}`
+        const currDate = `${new Date().getFullYear()}/${new Date().getMonth() + 1 >= 9 ? '0' : null}${new Date().getMonth() + 1}/${new Date().getDate() >= 9 ? '0' : null}${new Date().getDate()}`
       
         const submitDates = dates.find((item)=>{
           return item == currDate
@@ -160,8 +160,14 @@ const DataTableAttendance = ({ userid }) => {
     year: 'numeric', month
       : '2-digit', day: '2-digit'
   });
+
  async function handleEvent(type) {
     let action;
+   const now = new Date();
+   const hrs = String(now.getHours()).padStart(2, '0');   // 00–23
+   const min = String(now.getMinutes()).padStart(2, '0'); // 00–59
+   const sec = String(now.getSeconds()).padStart(2, '0'); // 00–59
+   const currTime = `${hrs}:${min}:${sec}`
     if (type !== "present") {
       const reason = prompt("Reason ?");
       if (type === "absent") {
@@ -171,14 +177,15 @@ const DataTableAttendance = ({ userid }) => {
           absent: 1,
           weekend: 0,
           reason: reason.toUpperCase(),
-          dateandtime: `${new Date().getDate() >= 9 ? '0' : null}${new Date().getDate()}/${new Date().getMonth() >= 9 ? '0' : null}${new Date().getMonth() + 1}/${new Date().getFullYear()}`,
+          date: `${currDate}`,
+          time:`${currTime}`,
           month: `${month} - ${new Date().getFullYear()}`
         }
         setIsLoading(false)
         setOpen(!open)
         setIsLoading(true)
         router.push(`/records/${userid}`);
-        window.location.reload();
+        // window.location.reload();
 
       } else if (type === "weekend") {
         action = {
@@ -187,14 +194,15 @@ const DataTableAttendance = ({ userid }) => {
           absent: 0,
           weekend: 1,
           reason: reason.toUpperCase(),
-          dateandtime: `${new Date().getDate() >= 9 ? '0' : null}${new Date().getDate()}/${new Date().getMonth() >= 9 ? '0' : null}${new Date().getMonth() + 1}/${new Date().getFullYear()}`,
+          date: `${currDate}`,
+          time:`${currTime}`,
           month: `${month} - ${new Date().getFullYear()}`
         }
         setIsLoading(false)
         setOpen(!open)
         setIsLoading(true)
         router.push(`/records/${userid}`);
-        window.location.reload();
+        // window.location.reload();
 
       }
     } else {
@@ -204,16 +212,19 @@ const DataTableAttendance = ({ userid }) => {
         absent: 0,
         weekend: 0,
         reason: "",
-        dateandtime: `${new Date().getDate() >= 9 ? '0' : null}${new Date().getDate()}/${new Date().getMonth() >= 9 ? '0' : null}${new Date().getMonth() + 1}/${new Date().getFullYear()}`,
+        date: `${currDate}`,
+        time:`${currTime}`,
         month: `${month} - ${new Date().getFullYear()}`
       }
       setIsLoading(false)
       setOpen(!open)
       setIsLoading(true)
       router.push(`/records/${userid}`);
-      window.location.reload();
+      // window.location.reload();
     }
 
+    console.log("action: ",action);
+    
     await axios.post(`${API}/attendance/`, action).then((res)=>{
       console.log(res.data)
     }).catch((err)=>{
@@ -337,9 +348,15 @@ const DataTableAttendance = ({ userid }) => {
                 </th>
                 <th
                   className="px-6 py-3 text-left text-xs font-medium text-sky-100 uppercase tracking-wider cursor-pointer hover:bg-gray-100 hover:text-sky-800"
-                  onClick={() => handleSort('dateandtime')}
+                  onClick={() => handleSort('date')}
                 >
-                  Date & Time {getSortIcon('dateandtime')}
+                  Date & Time {getSortIcon('date')}
+                </th>
+                <th
+                  className="px-6 py-3 text-left text-xs font-medium text-sky-100 uppercase tracking-wider cursor-pointer hover:bg-gray-100 hover:text-sky-800"
+                  onClick={() => handleSort('time')}
+                >
+                  Date & Time {getSortIcon('time')}
                 </th>
               </tr>
             </thead>
@@ -369,7 +386,10 @@ const DataTableAttendance = ({ userid }) => {
                       {item.reason}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {item.dateandtime}
+                      {item.date}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {item.time}
                     </td>
                     {/* <td className="px-6 py-4 whitespace-nowrap">
                     <span
@@ -386,7 +406,7 @@ const DataTableAttendance = ({ userid }) => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="8" className="px-6 py-4 text-center text-sm text-gray-500">
+                  <td colSpan="9" className="px-6 py-4 text-center text-sm text-gray-500">
                     No data found
                   </td>
                 </tr>

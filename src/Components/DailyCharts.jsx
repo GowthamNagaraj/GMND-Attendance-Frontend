@@ -31,10 +31,10 @@ export const DailyCharts = ({days,userid,token}) => {
     const recordAttendance = records.attendance
     // console.log(records.attendance);
 
-    for (let i = 0; i < recordAttendance.length; i++) {
-      // console.log(recordAttendance[i].dateandtime.split("-")[0]);
-      thereDays.push(recordAttendance[i].dateandtime.split("-")[0].trim())
-    }
+    // for (let i = 0; i < recordAttendance.length; i++) {
+    //   // console.log(recordAttendance[i].dateandtime.split("-")[0]);
+    //   thereDays.push(recordAttendance[i].dateandtime.split("-")[0].trim())
+    // }
     
     for (let i = 1; i <= days; i++) {
       thisMonthDays.push(i*0)
