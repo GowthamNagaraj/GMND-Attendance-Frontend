@@ -72,13 +72,15 @@ const DataTableAttendance = ({ userid }) => {
 
         const dates = [];
         const {attendance,user} = response
+        // console.log(attendance);
+        
         for (let i = 0; i < attendance.length; i++) {
           attendance[i].username = user[0].username
-          dates.push(attendance[i].dateandtime)
+          dates.push(attendance[i].date)
         }
         setData(attendance)
 
-        const currDate = `${new Date().getFullYear()}/${new Date().getMonth() + 1 >= 9 ? '0' : null}${new Date().getMonth() + 1}/${new Date().getDate() >= 9 ? '0' : null}${new Date().getDate()}`
+        const currDate = `${new Date().getFullYear()}/${new Date().getMonth() + 1 >= 9 ? '0' : '0'}${new Date().getMonth() + 1}/${new Date().getDate() >= 9 ? '0' : 0}${new Date().getDate()}`
       
         const submitDates = dates.find((item)=>{
           return item == currDate
@@ -156,10 +158,15 @@ const DataTableAttendance = ({ userid }) => {
   // month
   const month = new Date().toLocaleString('default', { month: 'long' });
   // currDate
-  const currDate = new Date().toLocaleString('default', {
+  let currDate = new Date().toLocaleString('default', {
     year: 'numeric', month
       : '2-digit', day: '2-digit'
   });
+
+  currDate = currDate.split("/");
+  const today = `${currDate[2]}/${currDate[0]}/${currDate[1]}`
+  // `${new Date().getFullYear()}/${new Date().getMonth() + 1 >= 9 ? '0' : '0'}${new Date().getMonth() + 1}/${new Date().getDate() >= 9 ? '0' : 0}${new Date().getDate()}`
+// console.log("today: ",today);
 
  async function handleEvent(type) {
     let action;
@@ -177,7 +184,7 @@ const DataTableAttendance = ({ userid }) => {
           absent: 1,
           weekend: 0,
           reason: reason.toUpperCase(),
-          date: `${currDate}`,
+          date: `${today}`,
           time:`${currTime}`,
           month: `${month} - ${new Date().getFullYear()}`
         }
@@ -185,7 +192,7 @@ const DataTableAttendance = ({ userid }) => {
         setOpen(!open)
         setIsLoading(true)
         router.push(`/records/${userid}`);
-        // window.location.reload();
+        window.location.reload();
 
       } else if (type === "weekend") {
         action = {
@@ -194,7 +201,7 @@ const DataTableAttendance = ({ userid }) => {
           absent: 0,
           weekend: 1,
           reason: reason.toUpperCase(),
-          date: `${currDate}`,
+          date: `${today}`,
           time:`${currTime}`,
           month: `${month} - ${new Date().getFullYear()}`
         }
@@ -202,7 +209,7 @@ const DataTableAttendance = ({ userid }) => {
         setOpen(!open)
         setIsLoading(true)
         router.push(`/records/${userid}`);
-        // window.location.reload();
+        window.location.reload();
 
       }
     } else {
@@ -212,7 +219,7 @@ const DataTableAttendance = ({ userid }) => {
         absent: 0,
         weekend: 0,
         reason: "",
-        date: `${currDate}`,
+        date: `${today}`,
         time:`${currTime}`,
         month: `${month} - ${new Date().getFullYear()}`
       }
@@ -220,7 +227,7 @@ const DataTableAttendance = ({ userid }) => {
       setOpen(!open)
       setIsLoading(true)
       router.push(`/records/${userid}`);
-      // window.location.reload();
+      window.location.reload();
     }
 
     console.log("action: ",action);

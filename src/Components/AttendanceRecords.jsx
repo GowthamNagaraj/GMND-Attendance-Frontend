@@ -75,7 +75,7 @@ const AttendanceRecords = ({ userid }) => {
         }
         setData(attendance)
 
-        const currDate = `${new Date().getFullYear()}/${new Date().getMonth() + 1 >= 9 ? '0' : null}${new Date().getMonth() + 1}/${new Date().getDate() >= 9 ? '0' : null}${new Date().getDate()}`;
+        const currDate = `${new Date().getFullYear()}/${new Date().getMonth() + 1 >= 9 ? '0' : '0'}${new Date().getMonth() + 1}/${new Date().getDate() >= 9 ? '0' : 0}${new Date().getDate()}`
       
         const submitDates = dates.find((item)=>{
           return item == currDate
