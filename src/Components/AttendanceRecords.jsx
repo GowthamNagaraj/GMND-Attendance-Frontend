@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import Progress from "@/ComponentsProgress"
-import axios from 'axios'
+// import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { getAttendanceReports } from '@/api/AttendanceApiCalls';
 
@@ -59,10 +59,11 @@ const AttendanceRecords = ({ userid }) => {
 
   useEffect(() => {
     if (!userid) return;
-
+    
     const token = localStorage.getItem('token');
 
     const fetchData = async () => {
+      setIsLoading(false);
       try {
         const response = await getAttendanceReports({userid,token})
 
@@ -73,6 +74,7 @@ const AttendanceRecords = ({ userid }) => {
           attendance[i].username = user[0].username
           dates.push(attendance[i].date)
         }
+        setIsLoading(true);
         setData(attendance)
 
         const currDate = `${new Date().getFullYear()}/${new Date().getMonth() + 1 >= 9 ? '0' : '0'}${new Date().getMonth() + 1}/${new Date().getDate() >= 9 ? '0' : 0}${new Date().getDate()}`

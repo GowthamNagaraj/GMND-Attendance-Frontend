@@ -3,6 +3,7 @@ import { getAttendanceReports } from '@/api/AttendanceApiCalls';
 import { DailyCharts } from '@/Components/DailyCharts';
 import { DoughnutChart } from '@/Components/DoughnutChart';
 import { Header } from '@/Components/Header';
+import Progress from '@/Components/Progress';
 import { Bird, Coffee, Fan, Squirrel } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -21,6 +22,7 @@ export default function DashboardPage({ params }) {
   const [absent, setAbsent] = useState(0);
   const [weekend,setWeekend] = useState(0);
   const [records, setRecords] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   const [month, setMonth] = useState([
     { name: "Januvary", days: 31 },
@@ -46,6 +48,7 @@ export default function DashboardPage({ params }) {
   },[])
 
   async function getData() {
+    setIsLoading(false);
     try {
       const reports = await getAttendanceReports({ userid, token })
       // console.log(reports.attendance);
@@ -55,7 +58,7 @@ export default function DashboardPage({ params }) {
         absArr.push(reports.attendance[i].absent)
         wkArr.push(reports.attendance[i].weekend)
       }
-      
+      setIsLoading(true);
       setRecords(reports.attendance)
       setPresent(psArr.reduce((prevValue,currValue)=> {return prevValue + currValue}))
       setAbsent(absArr.reduce((prevValue,currValue)=> {return prevValue + currValue}))
@@ -133,7 +136,7 @@ export default function DashboardPage({ params }) {
           <span className="text-green-500">{`தைரியம் பயத்தை விட ஒரு படி மேலே உள்ளது`}</span>
         </div>
       </div>
-      {/* <Progress progressHidden={isLoading} /> */}
+      <Progress progressHidden={isLoading} />
     </section>
   );
 }

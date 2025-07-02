@@ -39,7 +39,7 @@ export const DailyCharts = ({days,userid,token}) => {
     for (let i = 1; i <= days; i++) {
       thisMonthDays.push(i*0)
     }
-    const arr = [1,1,0,1,0,1,0];
+    const arr = [1];
     thisDays.push(thisMonthDays.map((val,idx)=>arr[idx] ?? val))
     
     console.log(thisDays[0]);
@@ -52,7 +52,7 @@ export const DailyCharts = ({days,userid,token}) => {
     datasets: [
       {
         label: 'Present',
-        data: [1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 1 = Present, 0 = Absent
+        data: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 1 = Present, 0 = Absent
         backgroundColor: 'rgba(34, 197, 94, 0.7)', // green
       },
       {

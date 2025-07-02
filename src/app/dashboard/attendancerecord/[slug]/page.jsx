@@ -1,6 +1,7 @@
 "use client"
 import AttendanceRecords from "@/Components/AttendanceRecords";
 import { Header } from "@/Components/Header";
+import Progress from "@/Components/Progress";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import { useState } from "react";
@@ -8,38 +9,43 @@ import { useState } from "react";
 // app/dashboard/attendancerecord/page.jsx
 export default function AttendanceRecordPage({params}) {
   const user_id = params.slug;
+  const API = process.env.NEXT_PUBLIC_API_BASE_URL
+  console.log("api: ", API);
   
   const [fromDate, setFromDate] = useState();
   const [toDate, setToDate] = useState();
+  const [isLoading, setIsLoading] = useState(true)
 
   async function downloadExcels(event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  const fDate = fromDate.split("-");
-  const tDate = toDate.split("-");
+    const fDate = fromDate.split("-");
+    const tDate = toDate.split("-");
 
-  const from = `${fDate[0]}-${fDate[1]}-${fDate[1]}`;
-  const to = `${tDate[0]}-${tDate[1]}-${tDate[1]}`;
+    const from = `${fDate[0]}-${fDate[1]}-${fDate[1]}`;
+    const to = `${tDate[0]}-${tDate[1]}-${tDate[1]}`;
 
-  console.log(from,to);
-  
-  try {
-    const res = await axios.get(`http://localhost:1998/GMND/api/downloadRecords/download`, {
-      params: { from, to },
-      responseType: 'blob'
-    });
-
-    fileDownload(res.data, 'attendance.xlsx');
-  } catch (error) {
-    console.log("error: ", error);
+    console.log(from,to);
+    setIsLoading(false);
+    try {
+      const res = await axios.get(`${API}/downloadRecords/download`, {
+        params: { from, to },
+        responseType: 'blob'
+      });
+      console.log("file resp: ",res.data);
+      setIsLoading(true);
+      fileDownload(res.data, 'attendance.xlsx');
+    } catch (error) {
+      setIsLoading(true);
+      console.log("error: ", error);
+    }
   }
-}
   
   return (
     <section className="w-full min-h-screen bg-white px-4 py-6 overflow-x-hidden">
       <div className="flex flex-col max-w-screen-2xl mx-auto">
         {/* Heading */}
-        <Header header={"Records"} subHeader={"Records for daily attendance records..."} team={true} download={false}/>
+        <Header header={"Records"} subHeader={"Records for daily attendance records..."} team={true} download={false} userid={user_id}/>
       </div>
 
 
@@ -48,7 +54,7 @@ export default function AttendanceRecordPage({params}) {
 
         <form className="xl:max-w-full lg:max-w-full max-w-56 mx-auto">
 
-          <div className="flex flex-col xl:flex-row lg:flex-row gap-x-4 items-center justify-center">
+          {/* <div className="flex flex-col xl:flex-row lg:flex-row gap-x-4 items-center justify-center">
             <div className="flex flex-col xl:flex-row lg:flex-row gap-x-6">
               <div className="flex flex-row items-center justify-center gap-x-5">
                 <label htmlFor="FROM" className="text-lg font-bold text-sky-800">FROM:</label>
@@ -60,14 +66,14 @@ export default function AttendanceRecordPage({params}) {
               </div>
             </div>
             <button type="button" onClick={(e)=>downloadExcels(e)} className="text-sky-700 hover:text-sky-100 cursor-pointer border border-sky-700 hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-sky-300 rounded-full text-lg font-bold p-2 text-center me-2 mb-2 dark:border-sky-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-sky-600 dark:focus:ring-sky-800">GO</button>
-          </div>
+          </div> */}
         </form>
 
       </div>
       <div className="w-full mt-4 text-center bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
           <AttendanceRecords userid={ user_id }/>
       </div>
-
+          <Progress progressHidden={isLoading} />
     </section>
   );
 }
