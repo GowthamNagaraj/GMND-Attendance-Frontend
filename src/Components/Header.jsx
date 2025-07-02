@@ -11,7 +11,7 @@ export const Header = ({header,subHeader,team, download}) => {
 
   const API = process.env.NEXT_PUBLIC_API_BASE_URL
   const user_id = useParams().slug;
-  console.log("user_id: ", user_id);
+  // console.log("user_id: ", user_id);
   
   const [isLoading, setIsLoading] = useState(true)
 

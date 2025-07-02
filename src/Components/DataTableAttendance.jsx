@@ -10,11 +10,15 @@ import Progress from "@/ComponentsProgress"
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { getAttendanceReports } from '@/api/AttendanceApiCalls';
+import { useSelector, useDispatch } from 'react-redux';
 
 const DataTableAttendance = ({ userid }) => {
   // console.log(visibleModal)
   const router = useRouter();
   const API = process.env.NEXT_PUBLIC_API_BASE_URL
+  // const attendanceDates = useSelector((state) => state.attendanceDates);
+  // const dispatch = useDispatch();
+
 
   // get username
   const username = localStorage.getItem("user");
@@ -64,7 +68,9 @@ const DataTableAttendance = ({ userid }) => {
 
   useEffect(() => {
     if (!userid) return;
-
+    // console.log("attendanceDates: ", attendanceDates);
+    
+    
     const token = localStorage.getItem('token');
     const fetchData = async () => {
       setIsLoading(false);

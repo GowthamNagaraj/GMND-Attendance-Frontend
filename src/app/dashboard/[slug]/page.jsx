@@ -45,7 +45,7 @@ export default function DashboardPage({ params }) {
 
   useEffect(()=>{
     getData()
-  },[])
+  },[getData])
 
   async function getData() {
     setIsLoading(false);
@@ -58,8 +58,11 @@ export default function DashboardPage({ params }) {
         absArr.push(reports.attendance[i].absent)
         wkArr.push(reports.attendance[i].weekend)
       }
+
+      // console.log("psArr: ", psArr);
+      
       setIsLoading(true);
-      setRecords(reports.attendance)
+      // setRecords(reports.attendance)
       setPresent(psArr.reduce((prevValue,currValue)=> {return prevValue + currValue}))
       setAbsent(absArr.reduce((prevValue,currValue)=> {return prevValue + currValue}))
       setWeekend(wkArr.reduce((prevValue,currValue)=> {return prevValue + currValue}))
@@ -119,14 +122,14 @@ export default function DashboardPage({ params }) {
         </div>
 
         {/* graph */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
+        {/* <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
             <div className="bg-slate-100 w-full xl:h-full lg:h-full md:h-72 h-40 p-1 flex items-center justify-center">
                 <DoughnutChart />
             </div>
             <div className="bg-slate-100 w-full xl:h-full lg:h-full md:h-72 h-40 p-1 flex items-center justify-center">
                 <DailyCharts days={mon.days} userid={userid} token={token}/>
             </div>
-        </div>
+        </div> */}
         {/* banner */}
         <div className="text-2xl font-bold flex flex-col justify-center gap-y-2 items-center">
           <span className="text-orange-500">{`சோதிப்பது காலமாக இருந்தாலும் சாதிப்பது நீங்களாக இருங்கள்`} </span>
